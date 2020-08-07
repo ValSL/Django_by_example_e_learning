@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
+from .fields import OrderField
 
 
 class Subject(models.Model):
@@ -40,9 +41,13 @@ class Module(models.Model):
                                on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
+    order = OrderField(blank=True, for_fields=['course'])
+
+    class Meta:
+        ordering = ['order']
 
     def __str__(self):
-        return self.title
+        return f'{self.order}. {self.title}'
 
 
 class Content(models.Model):
@@ -58,11 +63,16 @@ class Content(models.Model):
                                         'file')})
     object_id = models.PositiveIntegerField()
     item = GenericForeignKey('contenttype', 'object_id')
+    order = OrderField(blank=True, for_fields=['module'])
+
+    class Meta:
+        ordering = ['order']
 
 
 class ItemBase(models.Model):
     owner = models.ForeignKey(User,
-                              related_name='%(class)s_related',  # '%(class)s' будет заменен на название дочерней модели, в которой поле используется, в нижнем регистре.
+                              related_name='%(class)s_related',
+                              # '%(class)s' будет заменен на название дочерней модели, в которой поле используется, в нижнем регистре.
                               on_delete=models.CASCADE)
     title = models.CharField(max_length=250)
     created = models.DateTimeField(auto_now_add=True)
