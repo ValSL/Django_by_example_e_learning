@@ -11,6 +11,7 @@ class OrderField(models.PositiveIntegerField):
     def pre_save(self, model_instance, add):
         # pdb.set_trace()
         if getattr(model_instance, self.attname) is None:
+            print(self.attname)
             # no current value
             try:
                 qs = self.model.objects.all()
@@ -22,7 +23,7 @@ class OrderField(models.PositiveIntegerField):
                     print(qs)
                 last_item = qs.latest(self.attname)
                 value = last_item.order + 1
-            except ObjectDoesNotExist:
+            except ObjectDoesNotExist:  # эта ошибка срабатывает скорее всего на строке last_item = qs.latest(self.att)
                 value = 0
             setattr(model_instance, self.attname, value)
             return value
