@@ -40,7 +40,6 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
             self.obj = get_object_or_404(self.model, id=id, owner=request.user)
         return super().dispatch(request, module_id, model_name, id)
 
-
     # В методах get и post объекты self.model, self.obj, self.module берутся из метода dispatch
     # который передает эти объекты в них
     def get(self, request, module_id, model_name, id):
@@ -60,9 +59,9 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
             if not id:
                 # new content
                 Content.objects.create(module=self.module, item=obj)
-            return redirect('module_content_list', self.module_id)
-        return self.ender_to_response({'form': form,
-                                   'object': self.obj})
+            return redirect('module_content_list', self.module.id)
+        return self.render_to_response({'form': form,
+                                       'object': self.obj})
 
 
 class ContentDeleteView(View):
@@ -76,7 +75,12 @@ class ContentDeleteView(View):
         return redirect('module_content_list', module.id)
 
 
+class ModuleContentListView(TemplateResponseMixin, View):
+    template_name = 'courses/manage/module/content_list.html'
 
+    def get(self, request, module_id):
+        module = get_object_or_404(Module, id=module_id, course__owner=request.user)
+        return self.render_to_response({'module': module})
 
 
 class CourseModuleUpdateView(TemplateResponseMixin, View):
