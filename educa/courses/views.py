@@ -70,6 +70,7 @@ class ContentDeleteView(View):
         content = get_object_or_404(Content,
                                     id=id,
                                     module__course__owner=request.user)
+        module = content.module
         content.item.delete()
         content.delete()
         return redirect('module_content_list', module.id)
