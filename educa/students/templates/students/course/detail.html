@@ -28,6 +28,7 @@
         </ul>
     </div>
     <div class="module">
+        <!-- мы апрокидываем сюда module после module_contents так как это изменчивая переменная-->
         {% cache 600 module_contents module %}
             {% for content in module.contents.all %}
                 {% with item=content.item %}
