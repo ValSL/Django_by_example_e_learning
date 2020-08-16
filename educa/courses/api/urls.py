@@ -5,12 +5,13 @@ from . import views
 router = routers.DefaultRouter()  # инициализация роутера
 router.register('courses', views.CourseViewSet)  # динамическое создание ссылок на лист и объект,
 # в данном случае courses/ и courses/<pk>
+# Так же автогенерируется ссылка на метод enroll класса CourseViewSet
 
 
 app_name = 'courses'
 urlpatterns = [
     path('subjects/', views.SubjectListView.as_view(), name='subject_list'),
     path('subjects/<pk>/', views.SubjectDetailView.as_view(), name='subject_detail'),
-    path('courses/<pk>/enroll/', views.CourseEnrollView.as_view(), name='course_enroll'),
+    # path('courses/<pk>/enroll/', views.CourseEnrollView.as_view(), name='course_enroll'),
     path('', include(router.urls))
 ]
