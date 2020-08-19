@@ -50,6 +50,9 @@ INSTALLED_APPS = [
 
     # REST фреймворк
     'rest_framework',
+
+    # Приложение для чата
+    'chat',
 ]
 
 MIDDLEWARE = [
