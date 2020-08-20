@@ -3,6 +3,9 @@ from channels.generic.websocket import WebsocketConsumer
 
 
 class ChatConsumer(WebsocketConsumer):
+    """
+        Отправка сообщений самому себе в функции receive
+    """
     def connect(self):
         # accept connection
         self.accept()
