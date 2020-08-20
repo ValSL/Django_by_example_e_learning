@@ -53,14 +53,16 @@ INSTALLED_APPS = [
 
     # Приложение для чата
     'chat',
+    # Модуль channels
+    'channels'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',  # Кэширование
+    # 'django.middleware.cache.UpdateCacheMiddleware',  # Кэширование
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',  # Кэширование
+    # 'django.middleware.cache.FetchFromCacheMiddleware',  # Кэширование
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -158,3 +160,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+ASGI_APPLICATION = 'educa.routing.application'
