@@ -9,6 +9,9 @@ class ChatConsumer(WebsocketConsumer):
     def connect(self):
         # accept connection
         self.accept()
+        text = {'asdasda': 1}
+        data = json.lods(text)
+        print(data)
 
     def disconnect(self):
         pass
