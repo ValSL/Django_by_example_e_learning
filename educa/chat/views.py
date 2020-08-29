@@ -14,4 +14,4 @@ def course_chat_room(request, course_id):
     except:
         # любо курса нет, либо студент не подписан
         return HttpResponseForbidden()
-    return render(request, 'chat/room.html', {'course': course})
+    return render(request, "chat/room.html", {"course": course})
