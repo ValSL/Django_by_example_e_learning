@@ -8,9 +8,11 @@ https://docs.djangoproject.com/en/3.1/howto/deployment/asgi/
 """
 
 import os
+import django
+from channels.routing import get_default_application
 
-from django.core.asgi import get_asgi_application
+# from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'educa.settings')
-
-application = get_asgi_application()
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "educa.settings")
+django.setup()
+application = get_default_application()
