@@ -16,3 +16,6 @@ DATABASES = {
         "PORT": "",
     }
 }
+
+SECURE_SSL_REDIRECT = True  # должны ли HTTP-запросы перенаправляться на HTTPS
+CSRF_COOKIE_SECURE = True
